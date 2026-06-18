@@ -35,6 +35,7 @@ const translations = {
     male: "남성",
     female: "여성",
     submit: "운세 보기",
+    savePdf: "PDF 저장",
     notice: "※ 이 서비스는 전통 명리학 규칙을 바탕으로 한 재미용 해석입니다. 중요한 의사결정은 전문가와 상의하세요.",
     placeholder: "왼쪽 양식에 출생 정보를 입력하고 <strong>운세 보기</strong>를 눌러보세요.",
     invalidDate: "올바른 날짜를 입력해 주세요.",
@@ -88,6 +89,7 @@ const translations = {
     male: "男性",
     female: "女性",
     submit: "查看运势",
+    savePdf: "保存 PDF",
     notice: "※ 本服务基于传统命理规则提供娱乐性解读。重要决策请咨询专业人士。",
     placeholder: "请在左侧表单输入出生信息，然后点击 <strong>查看运势</strong>。",
     invalidDate: "请输入正确的日期。",
@@ -192,7 +194,11 @@ function makeHelpers(data) {
 
 function render(data, input) {
   const localizedData = localizeAnalysis(data);
-  $("#results").innerHTML = t().result(localizedData, localizeInput(input), makeHelpers(localizedData));
+  $("#results").innerHTML = `
+    <div class="result-actions">
+      <button class="pdf-button" type="button" data-action="save-pdf">${t().savePdf}</button>
+    </div>
+    ${t().result(localizedData, localizeInput(input), makeHelpers(localizedData))}`;
 }
 
 function setStaticLanguage() {
@@ -237,6 +243,12 @@ $("#saju-form").addEventListener("submit", (event) => {
   } catch (error) {
     lastAnalysis = null;
     $("#results").innerHTML = `<div class="result-card">${error.message}</div>`;
+  }
+});
+
+$("#results").addEventListener("click", (event) => {
+  if (event.target.matches('[data-action="save-pdf"]')) {
+    window.print();
   }
 });
 

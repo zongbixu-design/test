@@ -103,6 +103,8 @@ button {
 button:hover { transform: translateY(-1px); }
 .notice { color: var(--muted); font-size: 0.92rem; }
 .results { display: grid; gap: 18px; }
+.result-actions { display: flex; justify-content: flex-end; }
+.pdf-button { width: auto; min-width: 132px; }
 .placeholder { padding: 36px; text-align: center; color: var(--muted); }
 .result-card { padding: 24px; }
 .result-card h3 { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
@@ -125,4 +127,34 @@ button:hover { transform: translateY(-1px); }
 @media (max-width: 520px) {
   .two { grid-template-columns: 1fr; }
   .hero { padding-top: 42px; }
+}
+
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .hero,
+  .input-card,
+  .result-actions {
+    display: none;
+  }
+
+  .layout {
+    width: 100%;
+    margin: 0;
+    display: block;
+  }
+
+  .results {
+    display: block;
+  }
+
+  .result-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    margin-bottom: 14px;
+  }
 }
