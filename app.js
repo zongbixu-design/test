@@ -36,6 +36,8 @@ const translations = {
     female: "여성",
     submit: "운세 보기",
     notice: "※ 이 서비스는 전통 명리학 규칙을 바탕으로 한 재미용 해석입니다. 중요한 의사결정은 전문가와 상의하세요.",
+    print: "결과 인쇄",
+    printAria: "사주 결과 인쇄",
     placeholder: "왼쪽 양식에 출생 정보를 입력하고 <strong>운세 보기</strong>를 눌러보세요.",
     invalidDate: "올바른 날짜를 입력해 주세요.",
     elements: { 목: "목", 화: "화", 토: "토", 금: "금", 수: "수" },
@@ -89,6 +91,8 @@ const translations = {
     female: "女性",
     submit: "查看运势",
     notice: "※ 本服务基于传统命理规则提供娱乐性解读。重要决策请咨询专业人士。",
+    print: "打印结果",
+    printAria: "打印八字结果",
     placeholder: "请在左侧表单输入出生信息，然后点击 <strong>查看运势</strong>。",
     invalidDate: "请输入正确的日期。",
     elements: { 목: "木", 화: "火", 토: "土", 금: "金", 수: "水" },
@@ -192,7 +196,14 @@ function makeHelpers(data) {
 
 function render(data, input) {
   const localizedData = localizeAnalysis(data);
-  $("#results").innerHTML = t().result(localizedData, localizeInput(input), makeHelpers(localizedData));
+  $("#results").innerHTML = `
+    <div class="results-toolbar">
+      <button class="print-button" type="button" aria-label="${t().printAria}">🖨️ ${t().print}</button>
+    </div>
+    <div class="printable-results">
+      ${t().result(localizedData, localizeInput(input), makeHelpers(localizedData))}
+    </div>`;
+  $(".print-button").addEventListener("click", () => window.print());
 }
 
 function setStaticLanguage() {
