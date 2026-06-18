@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>간단한 계산기</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="calculator" aria-labelledby="app-title">
+    <section class="intro">
+      <p class="eyebrow">Simple Calculator</p>
+      <h1 id="app-title">간단한 계산기</h1>
+      <p>두 숫자를 입력하고 원하는 연산을 선택하세요.</p>
+    </section>
+
+    <form id="calculator-form" class="panel">
+      <label for="first-number">첫 번째 숫자</label>
+      <input id="first-number" name="firstNumber" type="number" step="any" placeholder="예: 12" required>
+
+      <label for="operation">연산</label>
+      <select id="operation" name="operation" aria-label="연산 선택">
+        <option value="add">더하기 (+)</option>
+        <option value="subtract">빼기 (-)</option>
+        <option value="multiply">곱하기 (×)</option>
+        <option value="divide">나누기 (÷)</option>
+      </select>
+
+      <label for="second-number">두 번째 숫자</label>
+      <input id="second-number" name="secondNumber" type="number" step="any" placeholder="예: 4" required>
+
+      <button type="submit">계산하기</button>
+    </form>
+
+    <section class="result-card" aria-live="polite">
+      <span>결과</span>
+      <output id="result">계산 결과가 여기에 표시됩니다.</output>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
